@@ -2,6 +2,8 @@ const { GraphQLServer } = require("graphql-yoga");
 
 const db = require("../models");
 
+const PORT = process.env.PORT || 4000;
+
 const resolvers = {
   Query: {
     info: () => `This is the API of a Hackernews Clone`,
@@ -31,4 +33,6 @@ const server = new GraphQLServer({
   resolvers,
   context: { ...db.sequelize.models },
 });
-server.start(() => console.log(`Server is running on http://localhost:4000`));
+server.start(() =>
+  console.log(`Server is running on http://localhost:${PORT}`)
+);
